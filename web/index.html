@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>msCron</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/bootstrap.css">
+    </head>
+    <body>
+        <div id="cron1">TODO write content</div>
+        <button id="myButton">Tset CRON</button>
+
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/msCron.js"></script>
+        <script>
+            var x = $("#cron1").msCron({
+                setCron :"0 4 5 1/23 * ? *",
+                activeTab:"DAILY"
+            });
+//            var x = $("#cron1").msCron();
+//            console.log(x);
+
+            $(document).on("click", "#myButton", function () {
+                console.log(x);
+               
+            });
+            
+
+        </script>
+    </body>
+</html>
