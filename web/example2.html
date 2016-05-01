@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>msCron | SET CRON</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/bootstrap.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="text-center text-info">Populating the CRON Expression..!</h1>
+            <div class="row" style="padding-top: 30px;">
+                <div class="col-sm-3">
+                    <input type="text" value="0 0/1 * 1/1 * ? *" class="form-control" id="myCronValue" placeholder="Please enter CRON Expression"> </div>
+                <div class="col-sm-3">
+                    <select class="form-control">
+                        <option value="MINUTES">MINUTES</option>
+                        <option value="HOURLY">HOURLY</option>
+                        <option value="DAILY">DAILY</option>
+                        <option value="WEEKLY">WEEKLY</option>
+                        <option value="MONTHLY">MONTHLY</option>
+                        <option value="YEARLY">YEARLY</option>
+                    </select>
+                </div>
+                <div class="col-sm-3"><button id="myButton" class="btn btn-info">POPULATE CRON</button></div>
+            </div>
+            <div id="cronSection"></div>
+        </div>
+        <script src="js/jquery.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/msCron.min.js"></script>
+        <script>
+            $(document).on("click", "#myButton", function () {
+                $("#cronSection").msCron({
+                    setCron: $("#myCronValue").val(),
+                    activeTab: $("select option:selected").val()
+                });
+            });
+        </script>
+    </body>
+</html>
