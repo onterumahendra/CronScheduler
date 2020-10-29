@@ -1,6 +1,6 @@
 # Bootstrap-3  CRON Expressions generator:
 
-msCron is a Jquery plug-in  which helps you to build cron expressions. msCron generated expressions are based on Quartz cron format. For your feedback send email to msbrother445@gmail.com.
+msCron is a Jquery plug-in  which helps you to build cron expressions. msCron generated expressions are based on Quartz cron format. For your feedback send email to mahendra.e.onteru@gmail.com.
 
 How to Use msCron:
 
