@@ -2,7 +2,7 @@
  =========================================================
  msCronjs
  https://github.com/onterumahendra/CronScheduler
- Copyright (c) 2016 MSquare Solutions
+ Copyright (c) 2021 MSquare Solutions
  =========================================================
  */
 /*
@@ -30,30 +30,36 @@
             activeTab: ""
         }, options);
 
-        var mainDiv = $("<div/>", {id: "CronGenMainDiv", style: "padding:15px;"});
-        var topMenu = $("<ul/>", {"class": "nav nav-tabs", id: "msCronTabs"});
-        $('<li/>', {'class': 'active'}).html($('<a id="msMinutesTab" role="tab" data-toggle="tab" href="#Minutes">Minutes</a>')).appendTo(topMenu);
-        $('<li/>').html($('<a id="msHourlyTab" role="tab" data-toggle="tab" href="#Hourly">Hourly</a>')).appendTo(topMenu);
-        $('<li/>').html($('<a id="msDailyTab" role="tab" data-toggle="tab" href="#Daily">Daily</a>')).appendTo(topMenu);
-        $('<li/>').html($('<a id="msWeeklyTab" role="tab" data-toggle="tab" href="#Weekly">Weekly</a>')).appendTo(topMenu);
-        $('<li/>').html($('<a id="msMonthlyTab" role="tab" data-toggle="tab" href="#Monthly">Monthly</a>')).appendTo(topMenu);
-        $('<li/>').html($('<a id="msYearlyTab" role="tab" data-toggle="tab" href="#Yearly">Yearly</a>')).appendTo(topMenu);
+        var mainDiv = $("<div/>", {id: "CronGenMainDiv", style: "padding:15px;", role:"tablist"});
+        var topMenu = $("<nav/>", { id: "msCronTabs"});
+        var insideDiv = $("<div/>", {id:"nav-tab", class:"nav nav-tabs", role:"tablist"});
+
+        $(insideDiv).appendTo(topMenu);
+        $('<a id="msMinutesTab" class="nav-link active" role="tab" data-bs-toggle="tab" href="#Minutes">Minutes</a>').appendTo(insideDiv);
+        $('<a id="msHourlyTab" class="nav-link" role="tab" data-bs-toggle="tab" href="#Hourly">Hourly</a>').appendTo(insideDiv);
+        $('<a id="msDailyTab" class="nav-link" role="tab" data-bs-toggle="tab" href="#Daily">Daily</a>').appendTo(insideDiv);
+        $('<a id="msWeeklyTab" class="nav-link" role="tab" data-bs-toggle="tab" href="#Weekly">Weekly</a>').appendTo(insideDiv);
+        $('<a id="msMonthlyTab" class="nav-link" role="tab" data-bs-toggle="tab" href="#Monthly">Monthly</a>').appendTo(insideDiv);
+        $('<a id="msYearlyTab" class="nav-link" role="tab" data-bs-toggle="tab" href="#Yearly">Yearly</a>').appendTo(insideDiv);
         $(topMenu).appendTo(mainDiv);
+
         var tabContent = $("<div/>", {"class": "tab-content"});
+        
         //creating the minutesTab
-        var minutesTab = $("<div/>", {"class": "tab-pane active", id: "Minutes"});
+        var minutesTab = $("<div/>", {"class": "tab-pane fade show active", id: "Minutes", role:"tabpanel", "aria-labelledby": "msMinutesTab"});
         var minutesTabSection = $("<div/>", {"style": "padding:15px"});
         $(minutesTabSection).append("Every&nbsp;");
-        $("<input/>", {id: "MinutesInput", type: "text", value: "1", class: "form-control", style: "width: 40px;display:inline"}).appendTo(minutesTabSection);
+        $("<input/>", {id: "MinutesInput", type: "text", value: "1", class: "form-control", style: "width: 80px;display:inline"}).appendTo(minutesTabSection);
         $(minutesTabSection).append("&nbsp;minute(s)");
         $(minutesTabSection).appendTo(minutesTab);
         $(minutesTab).appendTo(tabContent);
+
         //creating the hourlyTab
-        var hourlyTab = $("<div/>", {"class": "tab-pane", id: "Hourly"});
+        var hourlyTab = $("<div/>", {"class": "tab-pane fade", id: "Hourly", role:"tabpanel", "aria-labelledby": "msHourlyTab"});
         var hourlyOption1 = $("<div/>", {"style": "padding:15px"});
         $("<input/>", {type: "radio", value: "1", name: "HourlyRadio", checked: "checked"}).appendTo(hourlyOption1);
         $(hourlyOption1).append("&nbsp;Every&nbsp;");
-        $("<input/>", {id: "HoursInput", type: "text", class: "form-control", value: "1", style: "width: 40px;display:inline"}).appendTo(hourlyOption1);
+        $("<input/>", {id: "HoursInput", type: "text", class: "form-control", value: "1", style: "width: 80px;display:inline"}).appendTo(hourlyOption1);
         $(hourlyOption1).append("&nbsp;hour(s)");
         $(hourlyOption1).appendTo(hourlyTab);
         var hourlyOption2 = $("<div/>", {"style": "padding:15px"});
@@ -63,12 +69,13 @@
         $(hourlyOption2).append('<select id="AtMinutes" class="form-control minutes" style="width: 80px;display:inline;margin-right:5px;"></select>');
         $(hourlyOption2).appendTo(hourlyTab);
         $(hourlyTab).appendTo(tabContent);
+
         //creating the dailyTab
-        var dailyTab = $("<div/>", {"class": "tab-pane", id: "Daily"});
+        var dailyTab = $("<div/>", {"class": "tab-pane fade", id: "Daily", role:"tabpanel", "aria-labelledby": "msDailyTab"});
         var dailyOption1 = $("<div/>", {"style": "padding:15px"});
         $("<input/>", {type: "radio", value: "1", name: "DailyRadio", checked: "checked"}).appendTo(dailyOption1);
         $(dailyOption1).append("&nbsp;Every&nbsp;");
-        $("<input/>", {id: "DaysInput", type: "text", value: "1", class: "form-control", style: "width: 40px;display:inline"}).appendTo(dailyOption1);
+        $("<input/>", {id: "DaysInput", type: "text", value: "1", class: "form-control", style: "width: 80px;display:inline"}).appendTo(dailyOption1);
         $(dailyOption1).append("&nbsp;day(s)");
         $(dailyOption1).appendTo(dailyTab);
         var dailyOption2 = $("<div/>", {"style": "padding:15px"});
@@ -79,29 +86,30 @@
         $(dailyTab).append('<select id="DailyHours" class="form-control hours" style="width: 80px;display:inline;margin-right:5px;"></select>');
         $(dailyTab).append('<select id="DailyMinutes" class="form-control minutes" style="width: 80px;display:inline;margin-right:5px;"></select>');
         $(dailyTab).appendTo(tabContent);
+
         //creating the weeklyTab
-        var weeklyTab = $("<div/>", {"class": "tab-pane", id: "Weekly"});
+        var weeklyTab = $("<div/>", {"class": "tab-pane fade", id: "Weekly", role:"tabpanel", "aria-labelledby": "msWeeklyTab"});
         var weeklyWell = $("<div/>", {"style": "padding:15px"});
-        var monLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:5px"}).appendTo(weeklyWell);
-        $("<input/>", {type: "checkbox", value: "MON"}).appendTo(monLabel);
+        var monLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:15px"}).appendTo(weeklyWell);
+        $("<input/>", {type: "checkbox", value: "MON", style:"margin-right:5px"}).appendTo(monLabel);
         $(monLabel).append("Monday");
-        var tueLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:5px"}).appendTo(weeklyWell);
-        $("<input/>", {type: "checkbox", value: "TUE"}).appendTo(tueLabel);
+        var tueLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:15px"}).appendTo(weeklyWell);
+        $("<input/>", {type: "checkbox", value: "TUE", style:"margin-right:5px"}).appendTo(tueLabel);
         $(tueLabel).append("Tuesday");
-        var wedLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:5px"}).appendTo(weeklyWell);
-        $("<input/>", {type: "checkbox", value: "WED"}).appendTo(wedLabel);
+        var wedLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:15px"}).appendTo(weeklyWell);
+        $("<input/>", {type: "checkbox", value: "WED", style:"margin-right:5px"}).appendTo(wedLabel);
         $(wedLabel).append("Wednesday");
-        var thuLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:5px"}).appendTo(weeklyWell);
-        $("<input/>", {type: "checkbox", value: "THU"}).appendTo(thuLabel);
+        var thuLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:15px"}).appendTo(weeklyWell);
+        $("<input/>", {type: "checkbox", value: "THU", style:"margin-right:5px"}).appendTo(thuLabel);
         $(thuLabel).append("Thursday");
-        var friLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:5px"}).appendTo(weeklyWell);
-        $("<input/>", {type: "checkbox", value: "FRI"}).appendTo(friLabel);
+        var friLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:15px"}).appendTo(weeklyWell);
+        $("<input/>", {type: "checkbox", value: "FRI", style:"margin-right:5px"}).appendTo(friLabel);
         $(friLabel).append("Friday");
-        var satLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:5px"}).appendTo(weeklyWell);
-        $("<input/>", {type: "checkbox", value: "SAT"}).appendTo(satLabel);
+        var satLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:15px"}).appendTo(weeklyWell);
+        $("<input/>", {type: "checkbox", value: "SAT", style:"margin-right:5px"}).appendTo(satLabel);
         $(satLabel).append("Saturday");
-        var sunLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:5px"}).appendTo(weeklyWell);
-        $("<input/>", {type: "checkbox", value: "SUN"}).appendTo(sunLabel);
+        var sunLabel = $("<label/>", {"class": "checkbox-inline", "style": "margin-right:15px"}).appendTo(weeklyWell);
+        $("<input/>", {type: "checkbox", value: "SUN", style:"margin-right:5px"}).appendTo(sunLabel);
         $(sunLabel).append("Sunday");
 
         //Hack to fix the well box
@@ -110,14 +118,15 @@
         $(weeklyTab).append('<select id="WeeklyHours" class="form-control hours" style="width: 80px;display:inline;margin-right:5px;"></select>');
         $(weeklyTab).append('<select id="WeeklyMinutes" class="form-control minutes" style="width: 80px;display:inline;margin-right:5px;"></select>');
         $(weeklyTab).appendTo(tabContent);
+
         //creating the monthlyTab
-        var monthlyTab = $("<div/>", {"class": "tab-pane", id: "Monthly"});
+        var monthlyTab = $("<div/>", {"class": "tab-pane fade", id: "Monthly", role:"tabpanel", "aria-labelledby": "msMonthlyTab"});
         var monthlyOption1 = $("<div/>", {"style": "padding:15px"});
         $("<input/>", {type: "radio", value: "1", name: "MonthlyRadio", checked: "checked"}).appendTo(monthlyOption1);
         $(monthlyOption1).append("&nbsp;Day&nbsp");
-        $("<input/>", {id: "DayOfMOnthInput", type: "text", class: "form-control", value: "1", style: "width: 40px;display:inline"}).appendTo(monthlyOption1);
+        $("<input/>", {id: "DayOfMOnthInput", type: "text", class: "form-control", value: "1", style: "width: 80px;display:inline"}).appendTo(monthlyOption1);
         $(monthlyOption1).append("&nbsp;of every&nbsp;");
-        $("<input/>", {id: "MonthInput", type: "text", class: "form-control", value: "1", style: "width: 40px;display:inline;"}).appendTo(monthlyOption1);
+        $("<input/>", {id: "MonthInput", type: "text", class: "form-control", value: "1", style: "width: 80px;display:inline;"}).appendTo(monthlyOption1);
         $(monthlyOption1).append("&nbsp;month(s)");
         $(monthlyOption1).appendTo(monthlyTab);
         var monthlyOption2 = $("<div/>", {"style": "padding:15px"});
@@ -126,21 +135,22 @@
         $(monthlyOption2).append('<select id="WeekDay" class="form-control day-order-in-month" style="width: 80px;display:inline;margin-right:5px;"></select>');
         $(monthlyOption2).append('<select id="DayInWeekOrder" class="form-control week-days" style="width: 100px;display:inline"></select>');
         $(monthlyOption2).append("&nbsp;of every&nbsp;");
-        $("<input/>", {id: "EveryMonthInput", type: "text", class: "form-control", value: "1", style: "width: 40px;display:inline;"}).appendTo(monthlyOption2);
+        $("<input/>", {id: "EveryMonthInput", type: "text", class: "form-control", value: "1", style: "width: 80px;display:inline;"}).appendTo(monthlyOption2);
         $(monthlyOption2).append("&nbsp;month(s)");
         $(monthlyOption2).appendTo(monthlyTab);
         $(monthlyTab).append("Start time&nbsp;");
         $(monthlyTab).append('<select id="MonthlyHours" class="form-control hours" style="width: 80px;display:inline;margin-right:5px;"></select>');
         $(monthlyTab).append('<select id="MonthlyMinutes" class="form-control minutes" style="width: 80px;display:inline;margin-right:5px;"></select>');
         $(monthlyTab).appendTo(tabContent);
+
         //creating the yearlyTab
-        var yearlyTab = $("<div/>", {"class": "tab-pane", id: "Yearly"});
+        var yearlyTab = $("<div/>", {"class": "tab-pane fade", id: "Yearly", role:"tabpanel", "aria-labelledby": "msYearlyTab"});
         var yearlyOption1 = $("<div/>", {"style": "padding:15px"});
         $("<input/>", {type: "radio", value: "1", name: "YearlyRadio", checked: "checked"}).appendTo(yearlyOption1);
         $(yearlyOption1).append("&nbsp;Every&nbsp");
         $(yearlyOption1).append('<select id="MonthsOfYear" class="form-control months" style="width: 150px;display:inline"></select>');
         $(yearlyOption1).append("&nbsp;in day&nbsp;");
-        $("<input/>", {id: "YearInput", type: "text", class: "form-control", value: "1", style: "width: 40px;display:inline;"}).appendTo(yearlyOption1);
+        $("<input/>", {id: "YearInput", type: "text", class: "form-control", value: "1", style: "width: 80px;display:inline;"}).appendTo(yearlyOption1);
         $(yearlyOption1).appendTo(yearlyTab);
         var yearlyOption2 = $("<div/>", {"style": "padding:15px"});
         $("<input/>", {type: "radio", value: "2", name: "YearlyRadio"}).appendTo(yearlyOption2);
@@ -251,7 +261,7 @@
 
         function generate() {
 
-            var activeTab = $("ul#msCronTabs li.active a").prop("id");
+            var activeTab = $("nav#msCronTabs div a.active").prop("id");
             var results = "", activeTab;
             switch (activeTab) {
                 case "msMinutesTab":
