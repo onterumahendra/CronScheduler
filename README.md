@@ -2,9 +2,15 @@
 
 **msCron** is a Jquery plug-in which helps you to build cron expressions. 
 **msCron** generated expressions are based on `Quartz` cron format. 
+
 For your feedback send email to mahendra.e.onteru@gmail.com.
 
-How to Use msCron:
+## Dependencies
+
+ * [jQuery](https://jquery.com/)
+ * [bootstrap](https://getbootstrap.com/)
+
+## Usage
 
   Intialization:
   
